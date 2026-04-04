@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TERCEIRO INFO — Portal de Notícias</title>
+<link rel="icon" type="image/png" href="https://i.imgur.com/7sHCoxx.png">
+<link rel="shortcut icon" href="https://i.imgur.com/7sHCoxx.png">
+<link rel="apple-touch-icon" href="https://i.imgur.com/7sHCoxx.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -42,13 +45,37 @@ img{max-width:100%;display:block}
 #logout-btn{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.45);padding:.35rem .75rem;font-size:.7rem;cursor:pointer;border-radius:4px;transition:all .2s}
 #logout-btn:hover{border-color:var(--purple-l);color:var(--purple-l)}
 
-/* NAV */
+/* NAV — desktop */
 nav{background:#05050c;border-top:1px solid var(--border)}
 .nav-inner{max-width:1400px;margin:0 auto;padding:0 2rem;display:flex;overflow-x:auto}
 .nav-inner::-webkit-scrollbar{display:none}
 .nav-btn{background:none;border:none;color:var(--muted);padding:.78rem 1.25rem;font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s;border-radius:0}
 .nav-btn:hover{color:var(--text)}
 .nav-btn.active{color:#fff;border-bottom-color:var(--purple-l)}
+
+/* HAMBURGER — mobile nav */
+.hamburger-btn{display:none;background:none;border:1px solid rgba(255,255,255,.18);color:var(--text);width:36px;height:36px;border-radius:4px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;padding:6px;transition:border-color .2s;flex-shrink:0}
+.hamburger-btn:hover{border-color:var(--purple-l)}
+.ham-line{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:all .25s}
+.hamburger-btn.open .ham-line:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger-btn.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger-btn.open .ham-line:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* Mobile nav drawer */
+#mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;pointer-events:none}
+#mobile-nav.open{pointer-events:all}
+.mobile-nav-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);opacity:0;transition:opacity .28s;backdrop-filter:blur(4px)}
+#mobile-nav.open .mobile-nav-overlay{opacity:1}
+.mobile-nav-drawer{position:absolute;top:0;right:0;bottom:0;width:72%;max-width:300px;background:#0a0a16;border-left:2px solid var(--purple);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);padding:0}
+#mobile-nav.open .mobile-nav-drawer{transform:translateX(0)}
+.mobile-nav-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.3rem;border-bottom:1px solid var(--border2)}
+.mobile-nav-title{font-family:var(--bebas);font-size:1.3rem;letter-spacing:2px;background:linear-gradient(90deg,#fff,var(--purple-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mobile-nav-close{background:none;border:1px solid var(--border2);color:var(--muted);width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.mobile-nav-close:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
+.mobile-nav-links{flex:1;padding:.75rem 0;overflow-y:auto}
+.mobile-nav-link{display:block;width:100%;background:none;border:none;border-left:3px solid transparent;color:var(--muted);padding:.9rem 1.3rem;font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:left;cursor:pointer;transition:all .15s}
+.mobile-nav-link:hover{color:var(--text);background:var(--surface);border-left-color:var(--purple-m)}
+.mobile-nav-link.active{color:#fff;background:var(--surface);border-left-color:var(--purple-l)}
 
 /* ADMIN TOOLBAR */
 #admin-toolbar{background:#0c0c18;border-bottom:1px solid var(--gold);padding:.52rem 2rem;display:flex;gap:.55rem;align-items:center;flex-wrap:wrap}
@@ -163,6 +190,31 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .carousel-arrow.prev{left:1rem}
 .carousel-arrow.next{right:1rem}
 
+/* ── COUNTDOWN ── */
+.countdown-section{margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border2)}
+.countdown-eyebrow{font-size:.63rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;text-align:center}
+.countdown-title{font-family:var(--bebas);font-size:clamp(1.8rem,4vw,3rem);letter-spacing:2px;text-align:center;margin-bottom:.4rem;color:#fff}
+.countdown-subtitle{font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:2.2rem;letter-spacing:.5px}
+.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:680px;margin:0 auto}
+.countdown-unit{background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:1.5rem .75rem 1.2rem;text-align:center;position:relative;overflow:hidden}
+.countdown-unit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(92,45,145,.18) 0%,transparent 60%);pointer-events:none}
+.countdown-num{font-family:var(--bebas);font-size:clamp(2.4rem,5vw,4rem);line-height:1;letter-spacing:2px;background:linear-gradient(160deg,#fff 30%,var(--purple-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;min-width:2ch;text-align:center}
+.countdown-label{font-size:.58rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2);margin-top:.4rem;display:block}
+.countdown-expired{text-align:center;padding:2rem;background:var(--surface);border:1px solid var(--border2);border-radius:8px;max-width:680px;margin:0 auto}
+.countdown-expired .emoji{font-size:2.5rem;margin-bottom:.5rem}
+.countdown-expired p{font-family:var(--bebas);font-size:1.8rem;letter-spacing:2px;color:var(--gold)}
+.countdown-expired span{font-size:.82rem;color:var(--muted);display:block;margin-top:.3rem}
+.countdown-no-date{text-align:center;padding:2rem;color:var(--muted2);font-size:.85rem}
+.countdown-no-date span{font-size:1.8rem;display:block;margin-bottom:.5rem;opacity:.2}
+
+/* Admin date setter */
+.countdown-admin-set{max-width:680px;margin:1.5rem auto 0;background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.countdown-admin-set label{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);flex-shrink:0}
+.countdown-admin-set input[type="datetime-local"]{flex:1;min-width:180px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:.45rem .75rem;font-size:.85rem;border-radius:4px;font-family:var(--fig)}
+.countdown-admin-set input[type="datetime-local"]:focus{outline:none;border-color:var(--purple-l)}
+.countdown-admin-set button{background:var(--purple);color:#fff;border:none;padding:.48rem 1.1rem;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .2s;white-space:nowrap}
+.countdown-admin-set button:hover{background:var(--purple-m)}
+
 /* ── ABOUT ── */
 .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
 .about-big{font-family:var(--bebas);font-size:clamp(2.6rem,4.5vw,4.2rem);line-height:1.02;letter-spacing:1px;margin-bottom:1.4rem}
@@ -236,6 +288,17 @@ footer strong{color:var(--purple-l)}
   .header-top{padding:0 1rem}
   .header-tagline{display:none}
 }
+
+/* MOBILE NAV — telas pequenas */
+@media(max-width:700px){
+  nav{display:none} /* esconde nav desktop */
+  .hamburger-btn{display:flex}
+  #mobile-nav{display:block}
+  .countdown-grid{grid-template-columns:repeat(2,1fr)}
+  .countdown-admin-set{flex-direction:column;align-items:stretch}
+  .countdown-admin-set input[type="datetime-local"]{min-width:0}
+}
+
 @media(max-width:600px){
   .hero-title{font-size:2rem}
   .cal-day{min-height:64px}
@@ -251,7 +314,6 @@ footer strong{color:var(--purple-l)}
 <header id="site-header">
   <div class="header-top">
     <div class="logo-wrap">
-      <!-- Logo image — substitua a URL pelo link direto da imagem do logo enviado -->
       <img class="logo-img" id="logo-img-el"
            src="blob:https://imgur.com/d7d58ce2-b727-4a77-a251-8a3b4941a33e"
            alt="Logo Terceiro INFO"
@@ -266,8 +328,15 @@ footer strong{color:var(--purple-l)}
       <div id="admin-indicator" class="hidden"><div class="admin-dot"></div> ADM ONLINE</div>
       <button id="login-btn" onclick="openLoginModal()">Entrar</button>
       <button id="logout-btn" class="hidden" onclick="doLogout()">Sair</button>
+      <!-- Hambúrguer — só aparece em mobile via CSS -->
+      <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
     </div>
   </div>
+  <!-- Desktop nav -->
   <nav>
     <div class="nav-inner">
       <button class="nav-btn active" onclick="showSection('home',this)">Notícias</button>
@@ -276,6 +345,22 @@ footer strong{color:var(--purple-l)}
     </div>
   </nav>
 </header>
+
+<!-- MOBILE NAV DRAWER -->
+<div id="mobile-nav">
+  <div class="mobile-nav-overlay" onclick="closeMobileNav()"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-title">TERCEIRO INFO</div>
+      <button class="mobile-nav-close" onclick="closeMobileNav()">×</button>
+    </div>
+    <div class="mobile-nav-links">
+      <button class="mobile-nav-link active" id="mob-btn-home" onclick="mobileNavTo('home','mob-btn-home')">📰 Notícias</button>
+      <button class="mobile-nav-link" id="mob-btn-cronograma" onclick="mobileNavTo('cronograma','mob-btn-cronograma')">📅 Cronograma da Sala</button>
+      <button class="mobile-nav-link" id="mob-btn-sobre" onclick="mobileNavTo('sobre','mob-btn-sobre')">👥 Sobre a Turma</button>
+    </div>
+  </div>
+</div>
 
 <!-- ADMIN TOOLBAR -->
 <div id="admin-toolbar" class="hidden">
@@ -340,18 +425,6 @@ footer strong{color:var(--purple-l)}
     <div class="eyebrow">Quem somos</div>
     <h1 class="sec-title" style="font-size:2.5rem;margin-bottom:2rem">SOBRE A TURMA</h1>
 
-    <!-- CARROSSEL -->
-    <div class="carousel-wrap">
-      <button class="carousel-arrow prev" onclick="carouselPrev()">‹</button>
-      <button class="carousel-arrow next" onclick="carouselNext()">›</button>
-      <div class="carousel-track" id="carousel-track">
-        <div class="carousel-slide">
-          <div class="carousel-empty"><span>🖼</span><p>Nenhuma foto ainda — o admin pode adicionar!</p></div>
-        </div>
-      </div>
-      <div class="carousel-dots" id="carousel-dots"><button class="c-dot active"></button></div>
-    </div>
-
     <div class="about-layout">
       <div>
         <h2 class="about-big">TERCEIRO ANO DE<br><em>INFORMÁTICA</em></h2>
@@ -375,6 +448,37 @@ footer strong{color:var(--purple-l)}
         </div>
       </div>
     </div>
+
+    <!-- CARROSSEL — ao final da aba Sobre -->
+    <div style="margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border2)">
+      <div class="eyebrow" style="text-align:center">Nossa Galeria</div>
+      <h2 class="sec-title" style="font-size:2rem;text-align:center;margin-bottom:1.5rem">FOTOS DA TURMA</h2>
+      <div class="carousel-wrap">
+        <button class="carousel-arrow prev" onclick="carouselPrev()">‹</button>
+        <button class="carousel-arrow next" onclick="carouselNext()">›</button>
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-slide">
+            <div class="carousel-empty"><span>🖼</span><p>Nenhuma foto ainda — o admin pode adicionar!</p></div>
+          </div>
+        </div>
+        <div class="carousel-dots" id="carousel-dots"><button class="c-dot active"></button></div>
+      </div>
+    </div>
+
+    <!-- COUNTDOWN FORMATURA -->
+    <div class="countdown-section">
+      <div class="countdown-eyebrow">🎓 Contagem Regressiva</div>
+      <h2 class="countdown-title">ATÉ A FORMATURA</h2>
+      <p class="countdown-subtitle" id="countdown-date-display"></p>
+      <div id="countdown-display"></div>
+      <!-- Painel admin para definir data -->
+      <div id="countdown-admin-panel" class="countdown-admin-set hidden">
+        <label>⚙ Data da Formatura</label>
+        <input type="datetime-local" id="graduation-datetime-input">
+        <button onclick="saveGraduationDate()">Salvar Data</button>
+      </div>
+    </div>
+
   </section>
 
   <!-- ADMIN LIST -->
@@ -562,6 +666,8 @@ var db=firebase.firestore();
 var isAdmin=false,allPages=[],allEvents=[],carouselImages=[],carIdx=0;
 var currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear();
 var selectedEventId=null;
+var graduationTimestamp=null; // ms epoch
+var countdownInterval=null;
 
 /* ─ helpers ─ */
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -572,33 +678,61 @@ function toast(msg,type){var t=document.getElementById('toast');t.textContent=ms
 function openModal(id){document.getElementById(id).classList.remove('hidden');}
 function closeModal(id){document.getElementById(id).classList.add('hidden');}
 function closeModalOverlay(e,id){if(e.target.id===id)closeModal(id);}
+function pad2(n){return String(n).padStart(2,'0');}
+
+/* ─ MOBILE NAV ─ */
+function toggleMobileNav(){
+  var nav=document.getElementById('mobile-nav');
+  var btn=document.getElementById('hamburger-btn');
+  var isOpen=nav.classList.contains('open');
+  if(isOpen){closeMobileNav();}else{nav.classList.add('open');btn.classList.add('open');document.body.style.overflow='hidden';}
+}
+function closeMobileNav(){
+  var nav=document.getElementById('mobile-nav');
+  var btn=document.getElementById('hamburger-btn');
+  nav.classList.remove('open');
+  btn.classList.remove('open');
+  document.body.style.overflow='';
+}
+function mobileNavTo(id,btnId){
+  // sync desktop nav highlight
+  var sectionMap={'home':0,'cronograma':1,'sobre':2};
+  var desktopBtns=document.querySelectorAll('.nav-btn');
+  desktopBtns.forEach(function(b){b.classList.remove('active');});
+  if(sectionMap[id]!==undefined&&desktopBtns[sectionMap[id]]){
+    desktopBtns[sectionMap[id]].classList.add('active');
+  }
+  // sync mobile btn highlight
+  document.querySelectorAll('.mobile-nav-link').forEach(function(b){b.classList.remove('active');});
+  var mBtn=document.getElementById(btnId);
+  if(mBtn)mBtn.classList.add('active');
+  showSection(id,null);
+  closeMobileNav();
+}
 
 /* ─ auth ─ */
 function openLoginModal(){openModal('modal-login');}
 function doLogin(){
-  var email = document.getElementById('login-user').value.trim();
-  var pass = document.getElementById('login-pass').value;
-  var err = document.getElementById('login-error');
-
-  firebase.auth().signInWithEmailAndPassword(email, pass)
+  var email=document.getElementById('login-user').value.trim();
+  var pass=document.getElementById('login-pass').value;
+  var err=document.getElementById('login-error');
+  firebase.auth().signInWithEmailAndPassword(email,pass)
     .then(function(){
-      isAdmin = true;
+      isAdmin=true;
       err.classList.add('hidden');
       closeModal('modal-login');
-
       document.getElementById('login-btn').classList.add('hidden');
       document.getElementById('logout-btn').classList.remove('hidden');
       document.getElementById('admin-indicator').classList.remove('hidden');
       document.getElementById('admin-toolbar').classList.remove('hidden');
       document.getElementById('carousel-admin-box').classList.remove('hidden');
-
+      document.getElementById('countdown-admin-panel').classList.remove('hidden');
       document.getElementById('login-user').value='';
       document.getElementById('login-pass').value='';
       document.getElementById('login-submit').textContent='Entrar';
-
       renderCarouselAdminList();
       renderCalendar();
-
+      syncGraduationInputField();
       toast('Bem-vindo, Administrador!','success');
     })
     .catch(function(){
@@ -614,6 +748,7 @@ function doLogout(){
     document.getElementById('admin-indicator').classList.add('hidden');
     document.getElementById('admin-toolbar').classList.add('hidden');
     document.getElementById('carousel-admin-box').classList.add('hidden');
+    document.getElementById('countdown-admin-panel').classList.add('hidden');
     toast('Sessão encerrada.');
     showSection('home',document.querySelectorAll('.nav-btn')[0]);
   });
@@ -649,6 +784,81 @@ function loadCarouselImages(){
     carouselImages=snap.docs.map(function(d){return Object.assign({id:d.id},d.data());});
     renderCarousel();
   }).catch(function(e){console.error(e);});
+}
+
+/* ─ GRADUATION DATE ─ */
+function loadGraduationDate(){
+  db.collection('settings').doc('graduation').get().then(function(doc){
+    if(doc.exists&&doc.data().datetime){
+      graduationTimestamp=doc.data().datetime; // stored as ms number
+      startCountdown();
+      syncGraduationInputField();
+    } else {
+      renderCountdownEmpty();
+    }
+  }).catch(function(){renderCountdownEmpty();});
+}
+function syncGraduationInputField(){
+  if(!graduationTimestamp)return;
+  var d=new Date(graduationTimestamp);
+  // format for datetime-local input: YYYY-MM-DDTHH:MM
+  var yyyy=d.getFullYear();
+  var mm=pad2(d.getMonth()+1);
+  var dd=pad2(d.getDate());
+  var hh=pad2(d.getHours());
+  var min=pad2(d.getMinutes());
+  var inp=document.getElementById('graduation-datetime-input');
+  if(inp)inp.value=yyyy+'-'+mm+'-'+dd+'T'+hh+':'+min;
+}
+function saveGraduationDate(){
+  if(!isAdmin)return;
+  var val=document.getElementById('graduation-datetime-input').value;
+  if(!val){toast('Selecione a data e hora da formatura.','error');return;}
+  var ts=new Date(val).getTime();
+  if(isNaN(ts)){toast('Data inválida.','error');return;}
+  db.collection('settings').doc('graduation').set({datetime:ts}).then(function(){
+    graduationTimestamp=ts;
+    startCountdown();
+    toast('Data da formatura salva!','success');
+  }).catch(function(e){toast('Erro: '+e.message,'error');});
+}
+function startCountdown(){
+  if(countdownInterval)clearInterval(countdownInterval);
+  renderCountdown();
+  countdownInterval=setInterval(renderCountdown,1000);
+}
+function renderCountdown(){
+  var display=document.getElementById('countdown-display');
+  var sub=document.getElementById('countdown-date-display');
+  if(!graduationTimestamp){renderCountdownEmpty();return;}
+  var now=Date.now();
+  var diff=graduationTimestamp-now;
+  // Show the date in the subtitle
+  var gDate=new Date(graduationTimestamp);
+  sub.textContent=gDate.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})
+    +' às '+pad2(gDate.getHours())+':'+pad2(gDate.getMinutes());
+  if(diff<=0){
+    display.innerHTML='<div class="countdown-expired"><div class="emoji">🎓</div><p>FORMADOS!</p><span>Parabéns, Terceiro INFO!</span></div>';
+    if(countdownInterval){clearInterval(countdownInterval);countdownInterval=null;}
+    return;
+  }
+  var totalSec=Math.floor(diff/1000);
+  var days=Math.floor(totalSec/86400);
+  var hours=Math.floor((totalSec%86400)/3600);
+  var mins=Math.floor((totalSec%3600)/60);
+  var secs=totalSec%60;
+  display.innerHTML='<div class="countdown-grid">'
+    +'<div class="countdown-unit"><span class="countdown-num">'+String(days).padStart(3,'0')+'</span><span class="countdown-label">Dias</span></div>'
+    +'<div class="countdown-unit"><span class="countdown-num">'+pad2(hours)+'</span><span class="countdown-label">Horas</span></div>'
+    +'<div class="countdown-unit"><span class="countdown-num">'+pad2(mins)+'</span><span class="countdown-label">Minutos</span></div>'
+    +'<div class="countdown-unit"><span class="countdown-num">'+pad2(secs)+'</span><span class="countdown-label">Segundos</span></div>'
+    +'</div>';
+}
+function renderCountdownEmpty(){
+  var display=document.getElementById('countdown-display');
+  var sub=document.getElementById('countdown-date-display');
+  sub.textContent='';
+  display.innerHTML='<div class="countdown-no-date"><span>🎓</span>'+(isAdmin?'Defina a data da formatura no painel abaixo.':'A data da formatura ainda não foi definida.')+'</div>';
 }
 
 /* ─ save page ─ */
@@ -871,20 +1081,30 @@ document.getElementById('carousel-img-url').addEventListener('input',function(){
 });
 document.getElementById('login-pass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 
+// Close mobile nav with Escape key
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var nav=document.getElementById('mobile-nav');
+    if(nav.classList.contains('open'))closeMobileNav();
+  }
+});
+
 /* ─ INIT ─ */
 loadPages();
 loadEvents();
 loadCarouselImages();
+loadGraduationDate();
 renderCalendar();
 firebase.auth().onAuthStateChanged(function(user){
   if(user){
-    isAdmin = true;
-
+    isAdmin=true;
     document.getElementById('login-btn').classList.add('hidden');
     document.getElementById('logout-btn').classList.remove('hidden');
     document.getElementById('admin-indicator').classList.remove('hidden');
     document.getElementById('admin-toolbar').classList.remove('hidden');
     document.getElementById('carousel-admin-box').classList.remove('hidden');
+    document.getElementById('countdown-admin-panel').classList.remove('hidden');
+    syncGraduationInputField();
   }
 });
 </script>
