@@ -58,7 +58,7 @@ img{max-width:100%;display:block}
 #logout-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);padding:.35rem .75rem;font-size:.7rem;cursor:pointer;border-radius:4px;transition:all .2s}
 #logout-btn:hover{border-color:var(--purple-l);color:var(--purple-l)}
 
-/* THEME + SETTINGS TOGGLES */
+/* THEME + SETTINGS TOGGLES — visíveis apenas em desktop */
 .theme-toggle{background:var(--surface2);border:1px solid var(--border2);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.05rem;transition:all .2s;flex-shrink:0}
 .theme-toggle:hover{border-color:var(--purple-l);transform:rotate(20deg)}
 .settings-toggle{background:var(--surface2);border:1px solid var(--border2);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.05rem;transition:all .2s;flex-shrink:0}
@@ -97,6 +97,12 @@ nav{background:var(--surface);border-top:1px solid var(--border)}
 .mobile-nav-link{display:block;width:100%;background:none;border:none;border-left:3px solid transparent;color:var(--muted);padding:.9rem 1.3rem;font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:left;cursor:pointer;transition:all .15s}
 .mobile-nav-link:hover{color:var(--text);background:var(--surface2);border-left-color:var(--purple-m)}
 .mobile-nav-link.active{color:var(--text);background:var(--surface2);border-left-color:var(--purple-l)}
+
+/* ── Botões de utilidade no menu mobile (tema + configurações) ── */
+.mobile-nav-utils{display:flex;gap:.6rem;padding:.9rem 1.3rem;border-top:1px solid var(--border2);margin-top:auto}
+.mobile-util-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:.45rem;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:.65rem .5rem;border-radius:6px;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+.mobile-util-btn:hover{background:var(--purple);border-color:var(--purple);color:#fff}
+.mobile-util-btn .util-icon{font-size:1.05rem}
 
 /* ── ADMIN PANEL (new tab-based) ── */
 #admin-toolbar{display:none} /* hidden — replaced by admin tab */
@@ -238,16 +244,44 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .legend-dot{width:10px;height:10px;border-radius:2px}
 
 /* ── DUAL-ROW INFINITE SCROLL CAROUSEL ── */
+/* FIX: carrossel ocupa toda a largura da página, fora do container main */
 .strip-carousel-section{margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border2)}
-.strip-carousel-wrap{overflow:hidden;position:relative;mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,black 8%,black 92%,transparent)}
-.strip-row{display:flex;gap:10px;padding:5px 0;width:max-content}
+.strip-carousel-full{
+  /* Quebra o container pai (main tem max-width:1400px) para ocupar 100vw */
+  position:relative;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  width:100vw;
+  overflow:hidden;
+}
+.strip-carousel-wrap{
+  overflow:hidden;
+  position:relative;
+  mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);
+  -webkit-mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent);
+}
+.strip-row{display:flex;gap:14px;padding:7px 0;width:max-content}
 .strip-row.row-right{animation:scrollRight var(--dur,32s) linear infinite}
 .strip-row.row-left{animation:scrollLeft var(--dur,32s) linear infinite}
 .strip-row:hover{animation-play-state:paused}
 @keyframes scrollRight{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes scrollLeft{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.strip-img-item{flex-shrink:0;width:200px;height:130px;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;border:2px solid transparent;transition:border-color .2s,transform .2s}
-.strip-img-item:hover{border-color:var(--purple-l);transform:scale(1.04)}
+
+/* FIX: imagens bem maiores */
+.strip-img-item{
+  flex-shrink:0;
+  width:340px;
+  height:220px;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+  position:relative;
+  border:2px solid transparent;
+  transition:border-color .2s,transform .2s;
+}
+.strip-img-item:hover{border-color:var(--purple-l);transform:scale(1.03)}
 .strip-img-item img{width:100%;height:100%;object-fit:cover;pointer-events:none}
 .strip-empty{text-align:center;padding:3.5rem 2rem;background:var(--surface);border:1px dashed var(--border2);border-radius:8px;color:var(--muted2);font-size:.85rem}
 .strip-empty span{font-size:2.2rem;display:block;margin-bottom:.6rem;opacity:.2}
@@ -400,15 +434,19 @@ footer strong{color:var(--purple-l)}
   nav{display:none}
   .hamburger-btn{display:flex}
   #mobile-nav{display:block}
+  /* FIX: esconder theme-toggle e settings-toggle no header em mobile */
+  .theme-toggle,.settings-toggle{display:none}
   .countdown-grid{grid-template-columns:repeat(2,1fr)}
   .countdown-admin-set{flex-direction:column;align-items:stretch}
   .countdown-admin-set input[type="datetime-local"]{min-width:0}
+  /* carrossel mobile: imagens menores mas ainda decentes */
+  .strip-img-item{width:220px;height:150px}
 }
 @media(max-width:600px){
   .hero-title{font-size:2rem}
   .cal-day{min-height:64px}
   .turma-stats{grid-template-columns:1fr 1fr}
-  .strip-img-item{width:150px;height:100px}
+  .strip-img-item{width:180px;height:125px}
 }
 </style>
 </head>
@@ -430,9 +468,9 @@ footer strong{color:var(--purple-l)}
     <div class="header-tagline">Informática · Tecnologia · Comunidade</div>
     <div class="header-actions">
       <div id="admin-indicator" class="hidden"><div class="admin-dot"></div> ADM ONLINE</div>
-      <!-- SETTINGS TOGGLE -->
+      <!-- SETTINGS TOGGLE — visível só em desktop (escondido via CSS em mobile) -->
       <button class="settings-toggle" id="settings-toggle-btn" onclick="toggleSettings()" title="Configurações">⚙️</button>
-      <!-- THEME TOGGLE -->
+      <!-- THEME TOGGLE — visível só em desktop (escondido via CSS em mobile) -->
       <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" title="Alternar tema claro/escuro">🌙</button>
       <button id="login-btn" onclick="openLoginModal()">Entrar</button>
       <button id="logout-btn" class="hidden" onclick="doLogout()">Sair</button>
@@ -465,6 +503,17 @@ footer strong{color:var(--purple-l)}
       <button class="mobile-nav-link active" id="mob-btn-home" onclick="mobileNavTo('home','mob-btn-home')">📰 Notícias</button>
       <button class="mobile-nav-link" id="mob-btn-cronograma" onclick="mobileNavTo('cronograma','mob-btn-cronograma')">📅 Cronograma da Sala</button>
       <button class="mobile-nav-link" id="mob-btn-sobre" onclick="mobileNavTo('sobre','mob-btn-sobre')">👥 Sobre a Turma</button>
+    </div>
+    <!-- FIX: botões de tema e configurações no menu mobile -->
+    <div class="mobile-nav-utils">
+      <button class="mobile-util-btn" onclick="mobilToggleTheme()">
+        <span class="util-icon" id="mob-theme-icon">🌙</span>
+        <span id="mob-theme-label">Tema</span>
+      </button>
+      <button class="mobile-util-btn" onclick="closeMobileNav();toggleSettings()">
+        <span class="util-icon">⚙️</span>
+        <span>Config.</span>
+      </button>
     </div>
   </div>
 </div>
@@ -633,12 +682,14 @@ footer strong{color:var(--purple-l)}
       </div>
     </div>
 
-    <!-- DUAL-ROW STRIP CAROUSEL -->
+    <!-- DUAL-ROW STRIP CAROUSEL — FIX: envolto em .strip-carousel-full para largura total -->
     <div class="strip-carousel-section">
       <div class="eyebrow" style="text-align:center">Nossa Galeria</div>
       <h2 class="sec-title" style="font-size:2rem;text-align:center;margin-bottom:1.5rem">FOTOS DA TURMA</h2>
-      <div id="strip-carousel-wrap" class="strip-carousel-wrap">
-        <div id="strip-empty" class="strip-empty"><span>🖼</span><p>Nenhuma foto ainda — o admin pode adicionar!</p></div>
+      <div class="strip-carousel-full">
+        <div id="strip-carousel-wrap" class="strip-carousel-wrap">
+          <div id="strip-empty" class="strip-empty"><span>🖼</span><p>Nenhuma foto ainda — o admin pode adicionar!</p></div>
+        </div>
       </div>
     </div>
 
@@ -1036,6 +1087,8 @@ function applySettingsToDOM(){
   // Countdown visibility
   var cs=document.getElementById('countdown-section');
   if(cs)cs.style.display=currentSettings.showCountdown?'':'none';
+  // Sync mobile theme icon/label
+  syncMobileThemeBtn();
 }
 
 function syncSettingsUI(){
@@ -1053,6 +1106,15 @@ function syncSettingsUI(){
   document.querySelectorAll('.accent-swatch').forEach(function(el){
     el.classList.toggle('active',el.dataset.accent===s.accent);
   });
+  syncMobileThemeBtn();
+}
+
+function syncMobileThemeBtn(){
+  var isDark=(currentSettings.theme==='dark');
+  var icon=document.getElementById('mob-theme-icon');
+  var label=document.getElementById('mob-theme-label');
+  if(icon)icon.textContent=isDark?'🌙':'☀️';
+  if(label)label.textContent=isDark?'Escuro':'Claro';
 }
 
 function setAccent(name,base,mid,light){
@@ -1102,6 +1164,7 @@ function applyTheme(theme){
   var chk=document.getElementById('cfg-theme');
   if(chk)chk.checked=(theme==='light');
   currentSettings.theme=theme;
+  syncMobileThemeBtn();
 }
 function toggleTheme(){
   var cur=document.documentElement.getAttribute('data-theme')||'dark';
@@ -1109,6 +1172,11 @@ function toggleTheme(){
   currentSettings.theme=next;
   applyTheme(next);
   saveSettingsToStorage();
+}
+/* FIX: toggle de tema a partir do menu mobile (fecha o menu antes) */
+function mobilToggleTheme(){
+  toggleTheme();
+  // não fecha o menu — usuário pode continuar navegando
 }
 
 /* ─ MOBILE NAV ─ */
@@ -1308,7 +1376,6 @@ function fmt(cmd,val){
   var ed=document.getElementById('page-content-editor');
   ed.focus();
   document.execCommand(cmd,false,val||null);
-  // After any block command, ensure a trailing paragraph so user can type below
   ensureTrailingParagraph(ed);
 }
 function ensureTrailingParagraph(ed){
@@ -1317,7 +1384,6 @@ function ensureTrailingParagraph(ed){
   if(!lastChild||blockTags.indexOf(lastChild.tagName)!==-1){
     var p=document.createElement('p');p.innerHTML='<br>';
     ed.appendChild(p);
-    // Move cursor to that paragraph
     try{
       var sel=window.getSelection();
       var range=document.createRange();
@@ -1383,7 +1449,6 @@ document.addEventListener('DOMContentLoaded',function(){
       if(!sel.rangeCount)return;
       var range=sel.getRangeAt(0);
       var node=range.startContainer;
-      // Walk up to find block parent inside editor
       var block=node;
       while(block&&block!==ed){
         if(block.nodeType===1){
@@ -1437,7 +1502,6 @@ function openEditPage(id){
       return'<p>'+p+'</p>';
     }).join('');
   }
-  // Ensure trailing paragraph
   ensureTrailingParagraph(editor);
   openModal('modal-new-page');
 }
@@ -1715,14 +1779,10 @@ function renderStripCarousel(){
     wrap.innerHTML='<div class="strip-empty"><span>🖼</span><p>Nenhuma foto ainda — o admin pode adicionar!</p></div>';
     return;
   }
-  // Build two arrays: row1 and row2
-  // If fewer than 4 images, duplicate to fill
   var imgs=carouselImages.slice();
   while(imgs.length<4)imgs=imgs.concat(imgs);
-  // Split: odd indices go to row1, even to row2
   var row1=[],row2=[];
   imgs.forEach(function(img,i){if(i%2===0)row1.push(img);else row2.push(img);});
-  // Double each row for seamless loop
   function makeRow(arr,dir){
     var doubled=arr.concat(arr);
     var html=doubled.map(function(img){
@@ -1737,7 +1797,6 @@ function renderStripCarousel(){
   var dur=speedMap[currentSettings.stripSpeed||3]||'28s';
   var html=makeRow(row1,'row-right')+makeRow(row2,'row-left');
   wrap.innerHTML=html;
-  // Apply current speed and play state
   wrap.querySelectorAll('.strip-row').forEach(function(r){
     r.style.setProperty('--dur',dur);
     r.style.animationPlayState=(currentSettings.autoStrip!==false)?'running':'paused';
@@ -1781,7 +1840,7 @@ function saveCarouselImage(){
 function deleteCarouselImage(id){
   if(!isAdmin||!confirm('Remover esta foto?'))return;
   db.collection('carousel').doc(id).delete().then(function(){
-    carouselImages=carouselImages.filter(function(i){return i.id!==id;});
+    carouselImages=carouselImages.filter(function(i){return i.i!==id;});
     renderStripCarousel();renderCarouselAdminList();toast('Foto removida.','success');
   }).catch(function(e){toast('Erro: '+e.message,'error');});
 }
