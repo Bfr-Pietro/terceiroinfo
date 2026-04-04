@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,50 +11,68 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
+/* ── TEMA ── */
+:root,[data-theme="dark"]{
   --bg:#08080f;--surface:#111118;--surface2:#191926;
   --purple:#5c2d91;--purple-m:#7b3fc4;--purple-l:#a46ee8;
   --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
   --text:#eeeef8;--muted:#8888aa;--muted2:#55556a;
   --white:#ffffff;--gold:#c9a84c;
   --bebas:'Bebas Neue',sans-serif;--fig:'Figtree',sans-serif;
+  --shadow:rgba(0,0,0,.55);
+  --input-bg:#191926;
+}
+[data-theme="light"]{
+  --bg:#f4f4fa;--surface:#ffffff;--surface2:#eeeef6;
+  --purple:#5c2d91;--purple-m:#7b3fc4;--purple-l:#7b3fc4;
+  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.16);
+  --text:#18181f;--muted:#555570;--muted2:#888899;
+  --white:#ffffff;--gold:#b8860b;
+  --shadow:rgba(0,0,0,.12);
+  --input-bg:#f0f0f8;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--fig);background:var(--bg);color:var(--text);line-height:1.6;font-size:16px}
+body{font-family:var(--fig);background:var(--bg);color:var(--text);line-height:1.6;font-size:16px;transition:background .25s,color .25s}
 button,input,textarea,select{font-family:var(--fig)}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 .hidden{display:none!important}
 
 /* ── HEADER ── */
-#site-header{background:#05050c;position:sticky;top:0;z-index:200;border-bottom:2px solid var(--purple)}
+#site-header{background:var(--surface);position:sticky;top:0;z-index:200;border-bottom:2px solid var(--purple);box-shadow:0 2px 18px var(--shadow)}
+[data-theme="dark"] #site-header{background:#05050c}
 .header-top{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:66px;max-width:1400px;margin:0 auto}
 .logo-wrap{display:flex;align-items:center;gap:.85rem;cursor:default}
 .logo-img{height:44px;width:44px;object-fit:contain;border-radius:6px;flex-shrink:0}
 .logo-text{line-height:1}
-.logo-top{font-size:.58rem;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.35)}
-.logo-main{font-family:var(--bebas);font-size:1.85rem;letter-spacing:3px;background:linear-gradient(90deg,#fff 0%,var(--purple-l) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.header-tagline{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.28);font-weight:500}
+.logo-top{font-size:.58rem;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--muted)}
+.logo-main{font-family:var(--bebas);font-size:1.85rem;letter-spacing:3px;background:linear-gradient(90deg,var(--text) 0%,var(--purple-l) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header-tagline{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:500}
 .header-actions{display:flex;align-items:center;gap:.75rem}
 #login-btn{background:var(--purple);color:#fff;border:none;padding:.48rem 1.1rem;font-size:.73rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .2s}
 #login-btn:hover{background:var(--purple-m)}
 #admin-indicator{display:flex;align-items:center;gap:.5rem;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 .admin-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
-#logout-btn{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.45);padding:.35rem .75rem;font-size:.7rem;cursor:pointer;border-radius:4px;transition:all .2s}
+#logout-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);padding:.35rem .75rem;font-size:.7rem;cursor:pointer;border-radius:4px;transition:all .2s}
 #logout-btn:hover{border-color:var(--purple-l);color:var(--purple-l)}
 
+/* THEME TOGGLE */
+.theme-toggle{background:var(--surface2);border:1px solid var(--border2);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.05rem;transition:all .2s;flex-shrink:0}
+.theme-toggle:hover{border-color:var(--purple-l);transform:rotate(20deg)}
+
 /* NAV — desktop */
-nav{background:#05050c;border-top:1px solid var(--border)}
+nav{background:var(--surface);border-top:1px solid var(--border)}
+[data-theme="dark"] nav{background:#05050c}
 .nav-inner{max-width:1400px;margin:0 auto;padding:0 2rem;display:flex;overflow-x:auto}
 .nav-inner::-webkit-scrollbar{display:none}
 .nav-btn{background:none;border:none;color:var(--muted);padding:.78rem 1.25rem;font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s;border-radius:0}
 .nav-btn:hover{color:var(--text)}
-.nav-btn.active{color:#fff;border-bottom-color:var(--purple-l)}
+.nav-btn.active{color:var(--text);border-bottom-color:var(--purple-l)}
 
-/* HAMBURGER — mobile nav */
-.hamburger-btn{display:none;background:none;border:1px solid rgba(255,255,255,.18);color:var(--text);width:36px;height:36px;border-radius:4px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;padding:6px;transition:border-color .2s;flex-shrink:0}
+/* HAMBURGER */
+.hamburger-btn{display:none;background:none;border:1px solid var(--border2);color:var(--text);width:36px;height:36px;border-radius:4px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px;padding:6px;transition:border-color .2s;flex-shrink:0}
 .hamburger-btn:hover{border-color:var(--purple-l)}
 .ham-line{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;transition:all .25s}
 .hamburger-btn.open .ham-line:nth-child(1){transform:translateY(6px) rotate(45deg)}
@@ -66,21 +84,23 @@ nav{background:#05050c;border-top:1px solid var(--border)}
 #mobile-nav.open{pointer-events:all}
 .mobile-nav-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);opacity:0;transition:opacity .28s;backdrop-filter:blur(4px)}
 #mobile-nav.open .mobile-nav-overlay{opacity:1}
-.mobile-nav-drawer{position:absolute;top:0;right:0;bottom:0;width:72%;max-width:300px;background:#0a0a16;border-left:2px solid var(--purple);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);padding:0}
+.mobile-nav-drawer{position:absolute;top:0;right:0;bottom:0;width:72%;max-width:300px;background:var(--surface);border-left:2px solid var(--purple);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);padding:0}
+[data-theme="dark"] .mobile-nav-drawer{background:#0a0a16}
 #mobile-nav.open .mobile-nav-drawer{transform:translateX(0)}
 .mobile-nav-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.3rem;border-bottom:1px solid var(--border2)}
-.mobile-nav-title{font-family:var(--bebas);font-size:1.3rem;letter-spacing:2px;background:linear-gradient(90deg,#fff,var(--purple-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mobile-nav-title{font-family:var(--bebas);font-size:1.3rem;letter-spacing:2px;background:linear-gradient(90deg,var(--text),var(--purple-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .mobile-nav-close{background:none;border:1px solid var(--border2);color:var(--muted);width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .mobile-nav-close:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
 .mobile-nav-links{flex:1;padding:.75rem 0;overflow-y:auto}
 .mobile-nav-link{display:block;width:100%;background:none;border:none;border-left:3px solid transparent;color:var(--muted);padding:.9rem 1.3rem;font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:left;cursor:pointer;transition:all .15s}
-.mobile-nav-link:hover{color:var(--text);background:var(--surface);border-left-color:var(--purple-m)}
-.mobile-nav-link.active{color:#fff;background:var(--surface);border-left-color:var(--purple-l)}
+.mobile-nav-link:hover{color:var(--text);background:var(--surface2);border-left-color:var(--purple-m)}
+.mobile-nav-link.active{color:var(--text);background:var(--surface2);border-left-color:var(--purple-l)}
 
 /* ADMIN TOOLBAR */
-#admin-toolbar{background:#0c0c18;border-bottom:1px solid var(--gold);padding:.52rem 2rem;display:flex;gap:.55rem;align-items:center;flex-wrap:wrap}
+#admin-toolbar{background:var(--surface2);border-bottom:1px solid var(--gold);padding:.52rem 2rem;display:flex;gap:.55rem;align-items:center;flex-wrap:wrap}
+[data-theme="dark"] #admin-toolbar{background:#0c0c18}
 .toolbar-label{font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-right:.35rem}
-.toolbar-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.72);padding:.36rem .88rem;font-size:.7rem;font-weight:600;cursor:pointer;border-radius:4px;transition:all .2s;display:flex;align-items:center;gap:.3rem}
+.toolbar-btn{background:rgba(128,128,128,.08);border:1px solid var(--border2);color:var(--muted);padding:.36rem .88rem;font-size:.7rem;font-weight:600;cursor:pointer;border-radius:4px;transition:all .2s;display:flex;align-items:center;gap:.3rem}
 .toolbar-btn:hover{background:var(--purple);border-color:var(--purple);color:#fff}
 
 /* MAIN */
@@ -139,18 +159,37 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .article-title{font-family:var(--bebas);font-size:clamp(2.3rem,5vw,4rem);line-height:1.02;letter-spacing:1px;margin-bottom:1.3rem;max-width:900px}
 .article-meta-bar{display:flex;align-items:center;gap:1.1rem;padding:.85rem 0;border-top:1px solid var(--purple);border-bottom:1px solid var(--border);margin-bottom:2.2rem;font-size:.72rem;font-weight:500;color:var(--muted)}
 .article-meta-bar strong{color:var(--text)}
-.article-body{max-width:720px;font-size:1rem;line-height:1.88;color:#c0c0d5}
+.article-body{max-width:720px;font-size:1rem;line-height:1.88;color:var(--muted)}
+[data-theme="light"] .article-body{color:#444}
 .article-body p{margin-bottom:1.3rem}
 .article-body h2{font-family:var(--bebas);font-size:1.9rem;margin:1.8rem 0 .9rem;letter-spacing:1px;color:var(--text)}
 .article-body h3{font-family:var(--bebas);font-size:1.5rem;margin:1.4rem 0 .75rem;color:var(--text)}
 .article-body img{max-width:100%;border-radius:6px;margin:1.3rem 0}
+.article-body iframe{max-width:100%;border-radius:6px;margin:1.3rem 0;border:1px solid var(--border2)}
+.article-body a{color:var(--purple-l);text-decoration:underline}
+
+/* ── RICH EDITOR ── */
+.rich-editor-wrap{border:1px solid var(--border2);border-radius:4px;overflow:hidden}
+.rich-toolbar{display:flex;flex-wrap:wrap;gap:.28rem;padding:.5rem .65rem;background:var(--surface2);border-bottom:1px solid var(--border2)}
+.rt-btn{background:var(--surface);border:1px solid var(--border2);color:var(--muted);width:28px;height:28px;border-radius:3px;cursor:pointer;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.rt-btn:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
+.rt-btn.wide{width:auto;padding:0 .55rem;font-size:.65rem;letter-spacing:.5px}
+.rt-sep{width:1px;background:var(--border2);margin:2px 3px;align-self:stretch}
+#page-content-editor{width:100%;min-height:200px;padding:.75rem .9rem;background:var(--input-bg);color:var(--text);font-size:.9rem;font-family:var(--fig);line-height:1.7;border:none;outline:none;resize:vertical}
+/* iframe/button insert modal */
+.insert-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:1100;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px)}
+.insert-modal.open{display:flex}
+.insert-box{background:var(--surface);border-top:3px solid var(--purple-m);border-radius:6px;padding:1.6rem;width:100%;max-width:500px}
+.insert-box h3{font-family:var(--bebas);font-size:1.4rem;letter-spacing:1px;margin-bottom:1.1rem;color:#fff}
 
 /* ── CALENDAR ── */
 .cal-header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
 .cal-nav{display:flex;align-items:center;gap:.5rem}
 .cal-nav-btn{background:var(--surface);border:1px solid var(--border2);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text);border-radius:4px;transition:all .15s}
 .cal-nav-btn:hover{background:var(--purple);border-color:var(--purple)}
-.cal-month-label{font-family:var(--bebas);font-size:1.4rem;letter-spacing:2px;min-width:200px;text-align:center;color:#fff}
+.cal-nav-btn:disabled{opacity:.3;cursor:not-allowed}
+.cal-nav-btn:disabled:hover{background:var(--surface);border-color:var(--border2)}
+.cal-month-label{font-family:var(--bebas);font-size:1.4rem;letter-spacing:2px;min-width:200px;text-align:center;color:var(--text)}
 .cal-wrap{background:var(--surface);border:1px solid var(--border2);border-radius:4px;overflow:hidden}
 .cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);background:var(--purple)}
 .cal-weekday{text-align:center;padding:.68rem .3rem;font-size:.63rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85)}
@@ -159,7 +198,8 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .cal-day:nth-child(7n){border-right:none}
 .cal-day:hover{background:var(--surface2)}
 .cal-day.other-month{opacity:.32}
-.cal-day.today{background:#1a1230}
+.cal-day.today{background:var(--surface2)}
+[data-theme="dark"] .cal-day.today{background:#1a1230}
 .cal-day.today .day-num{color:var(--purple-l);font-weight:700}
 .day-num{font-size:.73rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.28rem}
 .cal-event{display:block;background:var(--purple);color:#fff;font-size:.6rem;font-weight:600;padding:.16rem .38rem;border-radius:2px;margin-bottom:.18rem;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background .15s}
@@ -193,12 +233,12 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 /* ── COUNTDOWN ── */
 .countdown-section{margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border2)}
 .countdown-eyebrow{font-size:.63rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;text-align:center}
-.countdown-title{font-family:var(--bebas);font-size:clamp(1.8rem,4vw,3rem);letter-spacing:2px;text-align:center;margin-bottom:.4rem;color:#fff}
+.countdown-title{font-family:var(--bebas);font-size:clamp(1.8rem,4vw,3rem);letter-spacing:2px;text-align:center;margin-bottom:.4rem;color:var(--text)}
 .countdown-subtitle{font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:2.2rem;letter-spacing:.5px}
 .countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:680px;margin:0 auto}
 .countdown-unit{background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:1.5rem .75rem 1.2rem;text-align:center;position:relative;overflow:hidden}
 .countdown-unit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(92,45,145,.18) 0%,transparent 60%);pointer-events:none}
-.countdown-num{font-family:var(--bebas);font-size:clamp(2.4rem,5vw,4rem);line-height:1;letter-spacing:2px;background:linear-gradient(160deg,#fff 30%,var(--purple-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;min-width:2ch;text-align:center}
+.countdown-num{font-family:var(--bebas);font-size:clamp(2.4rem,5vw,4rem);line-height:1;letter-spacing:2px;background:linear-gradient(160deg,var(--text) 30%,var(--purple-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;min-width:2ch;text-align:center}
 .countdown-label{font-size:.58rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2);margin-top:.4rem;display:block}
 .countdown-expired{text-align:center;padding:2rem;background:var(--surface);border:1px solid var(--border2);border-radius:8px;max-width:680px;margin:0 auto}
 .countdown-expired .emoji{font-size:2.5rem;margin-bottom:.5rem}
@@ -206,11 +246,9 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .countdown-expired span{font-size:.82rem;color:var(--muted);display:block;margin-top:.3rem}
 .countdown-no-date{text-align:center;padding:2rem;color:var(--muted2);font-size:.85rem}
 .countdown-no-date span{font-size:1.8rem;display:block;margin-bottom:.5rem;opacity:.2}
-
-/* Admin date setter */
 .countdown-admin-set{max-width:680px;margin:1.5rem auto 0;background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
 .countdown-admin-set label{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);flex-shrink:0}
-.countdown-admin-set input[type="datetime-local"]{flex:1;min-width:180px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:.45rem .75rem;font-size:.85rem;border-radius:4px;font-family:var(--fig)}
+.countdown-admin-set input[type="datetime-local"]{flex:1;min-width:180px;background:var(--input-bg);border:1px solid var(--border2);color:var(--text);padding:.45rem .75rem;font-size:.85rem;border-radius:4px;font-family:var(--fig)}
 .countdown-admin-set input[type="datetime-local"]:focus{outline:none;border-color:var(--purple-l)}
 .countdown-admin-set button{background:var(--purple);color:#fff;border:none;padding:.48rem 1.1rem;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .2s;white-space:nowrap}
 .countdown-admin-set button:hover{background:var(--purple-m)}
@@ -227,7 +265,6 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .stat-box{background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:1.1rem;text-align:center}
 .stat-number{font-family:var(--bebas);font-size:2rem;color:var(--purple-l);line-height:1;display:block}
 .stat-label{font-size:.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-top:.28rem}
-
 .carousel-admin-box{margin-top:1.5rem;background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:1.4rem}
 .carousel-admin-box h4{font-family:var(--bebas);font-size:1.3rem;letter-spacing:1px;margin-bottom:.9rem;color:var(--purple-l)}
 .img-list{display:flex;flex-direction:column;gap:.45rem;margin-bottom:.9rem}
@@ -236,19 +273,19 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .img-list-item button{background:none;border:1px solid var(--border2);color:var(--muted);padding:.18rem .48rem;font-size:.65rem;cursor:pointer;border-radius:3px;transition:all .15s}
 .img-list-item button:hover{background:#5a1010;border-color:#8a2020;color:#ff8080}
 
-/* ── MODALS ── */
+/* ── MODAIS ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:999;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(6px)}
 .modal{background:var(--surface);width:100%;max-width:540px;max-height:90vh;overflow-y:auto;border-top:3px solid var(--purple-m);border-radius:6px}
-.modal.wide{max-width:700px}
+.modal.wide{max-width:760px}
 .modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.35rem 1.8rem;border-bottom:1px solid var(--border)}
-.modal-title{font-family:var(--bebas);font-size:1.65rem;letter-spacing:1px;color:#fff}
+.modal-title{font-family:var(--bebas);font-size:1.65rem;letter-spacing:1px;color:var(--text)}
 .modal-close{background:none;border:1px solid var(--border2);width:31px;height:31px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--muted);border-radius:4px;transition:all .15s}
 .modal-close:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
 .modal-body{padding:1.75rem}
 .form-group{margin-bottom:1.05rem}
 .form-label{display:block;font-size:.66rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:.42rem}
 .form-hint{font-size:.68rem;color:var(--muted2);margin-top:.28rem;line-height:1.5}
-.form-input,.form-textarea,.form-select{width:100%;padding:.58rem .82rem;border:1px solid var(--border2);background:var(--surface2);color:var(--text);font-size:.88rem;font-family:var(--fig);border-radius:4px;transition:border-color .2s}
+.form-input,.form-textarea,.form-select{width:100%;padding:.58rem .82rem;border:1px solid var(--border2);background:var(--input-bg);color:var(--text);font-size:.88rem;font-family:var(--fig);border-radius:4px;transition:border-color .2s}
 .form-input:focus,.form-textarea:focus,.form-select:focus{outline:none;border-color:var(--purple-l)}
 .form-textarea{min-height:115px;resize:vertical;line-height:1.6}
 .form-error{color:#ff6b6b;font-size:.73rem;margin-top:.28rem}
@@ -257,6 +294,9 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .btn-primary:disabled{opacity:.4;cursor:not-allowed}
 .btn-danger{background:#721212;color:#fff;border:none;padding:.42rem .95rem;font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .2s}
 .btn-danger:hover{background:#9e1a1a}
+
+/* Edit badge */
+.edit-badge{display:inline-flex;align-items:center;gap:.35rem;background:rgba(201,168,76,.12);border:1px solid var(--gold);color:var(--gold);padding:.22rem .65rem;border-radius:3px;font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1rem}
 
 /* ADMIN LIST */
 .admin-list{display:flex;flex-direction:column;gap:.55rem}
@@ -267,7 +307,8 @@ main{max-width:1400px;margin:0 auto;padding:2.5rem 2rem;min-height:70vh}
 .admin-item-actions{display:flex;gap:.38rem;flex-shrink:0}
 
 /* FOOTER */
-footer{background:#03030a;color:var(--muted2);text-align:center;padding:1.8rem;font-size:.72rem;letter-spacing:1px;margin-top:5rem;border-top:2px solid var(--purple)}
+footer{background:var(--surface);color:var(--muted2);text-align:center;padding:1.8rem;font-size:.72rem;letter-spacing:1px;margin-top:5rem;border-top:2px solid var(--purple)}
+[data-theme="dark"] footer{background:#03030a}
 footer strong{color:var(--purple-l)}
 
 /* SPINNER / TOAST */
@@ -288,17 +329,14 @@ footer strong{color:var(--purple-l)}
   .header-top{padding:0 1rem}
   .header-tagline{display:none}
 }
-
-/* MOBILE NAV — telas pequenas */
 @media(max-width:700px){
-  nav{display:none} /* esconde nav desktop */
+  nav{display:none}
   .hamburger-btn{display:flex}
   #mobile-nav{display:block}
   .countdown-grid{grid-template-columns:repeat(2,1fr)}
   .countdown-admin-set{flex-direction:column;align-items:stretch}
   .countdown-admin-set input[type="datetime-local"]{min-width:0}
 }
-
 @media(max-width:600px){
   .hero-title{font-size:2rem}
   .cal-day{min-height:64px}
@@ -326,9 +364,10 @@ footer strong{color:var(--purple-l)}
     <div class="header-tagline">Informática · Tecnologia · Comunidade</div>
     <div class="header-actions">
       <div id="admin-indicator" class="hidden"><div class="admin-dot"></div> ADM ONLINE</div>
+      <!-- THEME TOGGLE -->
+      <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" title="Alternar tema claro/escuro">🌙</button>
       <button id="login-btn" onclick="openLoginModal()">Entrar</button>
       <button id="logout-btn" class="hidden" onclick="doLogout()">Sair</button>
-      <!-- Hambúrguer — só aparece em mobile via CSS -->
       <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
         <span class="ham-line"></span>
         <span class="ham-line"></span>
@@ -336,7 +375,6 @@ footer strong{color:var(--purple-l)}
       </button>
     </div>
   </div>
-  <!-- Desktop nav -->
   <nav>
     <div class="nav-inner">
       <button class="nav-btn active" onclick="showSection('home',this)">Notícias</button>
@@ -397,9 +435,9 @@ footer strong{color:var(--purple-l)}
         <h1 class="sec-title" style="font-size:2.5rem">CRONOGRAMA DA SALA</h1>
       </div>
       <div class="cal-nav">
-        <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+        <button class="cal-nav-btn" id="cal-prev-btn" onclick="changeMonth(-1)">‹</button>
         <div class="cal-month-label" id="cal-month-label">—</div>
-        <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+        <button class="cal-nav-btn" id="cal-next-btn" onclick="changeMonth(1)">›</button>
       </div>
     </div>
     <div class="cal-wrap">
@@ -449,7 +487,7 @@ footer strong{color:var(--purple-l)}
       </div>
     </div>
 
-    <!-- CARROSSEL — ao final da aba Sobre -->
+    <!-- CARROSSEL -->
     <div style="margin-top:3.5rem;padding-top:3rem;border-top:1px solid var(--border2)">
       <div class="eyebrow" style="text-align:center">Nossa Galeria</div>
       <h2 class="sec-title" style="font-size:2rem;text-align:center;margin-bottom:1.5rem">FOTOS DA TURMA</h2>
@@ -471,7 +509,6 @@ footer strong{color:var(--purple-l)}
       <h2 class="countdown-title">ATÉ A FORMATURA</h2>
       <p class="countdown-subtitle" id="countdown-date-display"></p>
       <div id="countdown-display"></div>
-      <!-- Painel admin para definir data -->
       <div id="countdown-admin-panel" class="countdown-admin-set hidden">
         <label>⚙ Data da Formatura</label>
         <input type="datetime-local" id="graduation-datetime-input">
@@ -495,7 +532,7 @@ footer strong{color:var(--purple-l)}
 <footer><strong>TERCEIRO INFO</strong> — Portal da Turma &nbsp;·&nbsp; 2026</footer>
 <div id="toast"></div>
 
-<!-- MODAIS -->
+<!-- ══════════════════════ MODAIS ══════════════════════ -->
 
 <!-- LOGIN -->
 <div id="modal-login" class="modal-overlay hidden" onclick="closeModalOverlay(event,'modal-login')">
@@ -519,14 +556,16 @@ footer strong{color:var(--purple-l)}
   </div>
 </div>
 
-<!-- NOVA NOTÍCIA -->
+<!-- NOVA / EDITAR NOTÍCIA -->
 <div id="modal-new-page" class="modal-overlay hidden" onclick="closeModalOverlay(event,'modal-new-page')">
   <div class="modal wide" onclick="event.stopPropagation()">
     <div class="modal-header">
-      <div class="modal-title">Nova Notícia</div>
+      <div class="modal-title" id="modal-page-title-label">Nova Notícia</div>
       <button class="modal-close" onclick="closeModal('modal-new-page')">×</button>
     </div>
     <div class="modal-body">
+      <div id="edit-mode-badge" class="edit-badge hidden">✏️ Modo Edição — alterações serão salvas na notícia existente</div>
+      <input type="hidden" id="editing-page-id">
       <div class="form-group">
         <label class="form-label">Título *</label>
         <input type="text" id="page-title" class="form-input" placeholder="Ex: Reunião de formatura confirmada">
@@ -548,18 +587,33 @@ footer strong{color:var(--purple-l)}
         <label class="form-label">Resumo * <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.7rem">(aparece no card)</span></label>
         <input type="text" id="page-excerpt" class="form-input" placeholder="Uma frase resumindo a notícia">
       </div>
+      <!-- RICH EDITOR -->
       <div class="form-group">
         <label class="form-label">Conteúdo *</label>
-        <textarea id="page-content" class="form-textarea" style="min-height:175px"
-          placeholder="Escreva o texto aqui.
-
-Separe os parágrafos com uma linha em branco.
-
-Para inserir uma imagem, cole o link da imagem numa linha sozinha:
-https://exemplo.com/imagem.jpg
-
-O site vai exibir a imagem automaticamente no lugar certo."></textarea>
-        <div class="form-hint">💡 Linha em branco = novo parágrafo. Link de imagem sozinho = imagem no texto.</div>
+        <div class="rich-editor-wrap">
+          <div class="rich-toolbar">
+            <button class="rt-btn" title="Negrito" onclick="fmt('bold')"><b>B</b></button>
+            <button class="rt-btn" title="Itálico" onclick="fmt('italic')"><i>I</i></button>
+            <button class="rt-btn" title="Sublinhado" onclick="fmt('underline')"><u>U</u></button>
+            <div class="rt-sep"></div>
+            <button class="rt-btn wide" title="Título H2" onclick="fmt('formatBlock','h2')">H2</button>
+            <button class="rt-btn wide" title="Título H3" onclick="fmt('formatBlock','h3')">H3</button>
+            <button class="rt-btn wide" title="Parágrafo" onclick="fmt('formatBlock','p')">P</button>
+            <div class="rt-sep"></div>
+            <button class="rt-btn" title="Lista" onclick="fmt('insertUnorderedList')">≡</button>
+            <button class="rt-btn" title="Lista numerada" onclick="fmt('insertOrderedList')">①</button>
+            <div class="rt-sep"></div>
+            <button class="rt-btn wide" title="Link" onclick="insertLink()">🔗</button>
+            <button class="rt-btn wide" title="Imagem (URL)" onclick="insertImage()">🖼</button>
+            <button class="rt-btn wide" title="Inserir Iframe / YouTube" onclick="openInsertIframe()">▷ Vídeo</button>
+            <button class="rt-btn wide" title="Inserir Botão personalizado" onclick="openInsertButton()">⊞ Botão</button>
+            <div class="rt-sep"></div>
+            <button class="rt-btn wide" title="Desfazer" onclick="fmt('undo')">↩</button>
+            <button class="rt-btn wide" title="Refazer" onclick="fmt('redo')">↪</button>
+          </div>
+          <div id="page-content-editor" contenteditable="true" spellcheck="true"></div>
+        </div>
+        <div class="form-hint">💡 Use a barra acima para formatar o texto, inserir imagens, vídeos e botões.</div>
       </div>
       <div class="form-group">
         <label class="form-label">Autor</label>
@@ -570,14 +624,60 @@ O site vai exibir a imagem automaticamente no lugar certo."></textarea>
   </div>
 </div>
 
-<!-- NOVO EVENTO -->
+<!-- INSERT IFRAME MODAL -->
+<div class="insert-modal" id="insert-iframe-modal">
+  <div class="insert-box">
+    <h3>Inserir Vídeo / Iframe</h3>
+    <div class="form-group">
+      <label class="form-label">URL do YouTube ou código Iframe</label>
+      <textarea id="iframe-input" class="form-textarea" style="min-height:90px;font-size:.82rem" placeholder="Cole a URL do YouTube (ex: https://youtu.be/xxx) ou o código iframe completo..."></textarea>
+    </div>
+    <div style="display:flex;gap:.65rem;margin-top:.5rem">
+      <button class="btn-primary" style="flex:1" onclick="confirmInsertIframe()">Inserir</button>
+      <button class="btn-primary" style="flex:1;background:var(--surface2);color:var(--muted);border:1px solid var(--border2)" onclick="closeInsertIframe()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- INSERT BUTTON MODAL -->
+<div class="insert-modal" id="insert-button-modal">
+  <div class="insert-box">
+    <h3>Inserir Botão</h3>
+    <div class="form-group">
+      <label class="form-label">Texto do Botão *</label>
+      <input type="text" id="btn-text-input" class="form-input" placeholder="Ex: Acessar formulário">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Link (URL) *</label>
+      <input type="url" id="btn-url-input" class="form-input" placeholder="https://exemplo.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Cor do Botão</label>
+      <select id="btn-color-input" class="form-select">
+        <option value="#5c2d91">Roxo (padrão)</option>
+        <option value="#1a5f95">Azul</option>
+        <option value="#14723c">Verde</option>
+        <option value="#b8860b">Dourado</option>
+        <option value="#721212">Vermelho</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:.65rem;margin-top:.5rem">
+      <button class="btn-primary" style="flex:1" onclick="confirmInsertButton()">Inserir</button>
+      <button class="btn-primary" style="flex:1;background:var(--surface2);color:var(--muted);border:1px solid var(--border2)" onclick="closeInsertButton()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOVO / EDITAR EVENTO -->
 <div id="modal-new-event" class="modal-overlay hidden" onclick="closeModalOverlay(event,'modal-new-event')">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-header">
-      <div class="modal-title">Novo Evento</div>
+      <div class="modal-title" id="modal-event-title-label">Novo Evento</div>
       <button class="modal-close" onclick="closeModal('modal-new-event')">×</button>
     </div>
     <div class="modal-body">
+      <div id="edit-event-badge" class="edit-badge hidden">✏️ Modo Edição — alterações serão salvas no evento</div>
+      <input type="hidden" id="editing-event-id">
       <div class="form-group">
         <label class="form-label">Nome *</label>
         <input type="text" id="event-name" class="form-input" placeholder="Ex: Prova de Redes">
@@ -588,13 +688,18 @@ O site vai exibir a imagem automaticamente no lugar certo."></textarea>
       </div>
       <div class="form-group">
         <label class="form-label">Tipo</label>
-        <select id="event-type" class="form-select">
+        <select id="event-type" class="form-select" onchange="handleEventTypeChange()">
           <option value="aula">Atividade / Aula</option>
           <option value="prova">Prova</option>
           <option value="entrega">Entrega</option>
           <option value="feriado">Feriado</option>
-          <option value="outro">Outro</option>
+          <option value="outro">Outro (especificar)</option>
         </select>
+      </div>
+      <!-- Campo de tipo personalizado (aparece quando "outro" é selecionado) -->
+      <div class="form-group" id="event-custom-type-group" style="display:none">
+        <label class="form-label">Qual tipo? *</label>
+        <input type="text" id="event-custom-type" class="form-input" placeholder="Ex: Palestra, Visita Técnica, Reunião…">
       </div>
       <div class="form-group">
         <label class="form-label">Descrição</label>
@@ -615,7 +720,8 @@ O site vai exibir a imagem automaticamente no lugar certo."></textarea>
     <div class="modal-body">
       <p id="detail-event-date" style="font-size:.72rem;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:.5rem"></p>
       <p id="detail-event-desc" style="color:var(--muted);margin-bottom:1.4rem;line-height:1.7;font-size:.9rem"></p>
-      <div id="detail-delete-btn" class="hidden">
+      <div id="detail-admin-actions" class="hidden" style="display:flex;gap:.65rem;flex-wrap:wrap">
+        <button class="read-more-btn" style="margin-top:0" onclick="openEditEvent()">✏️ Editar Evento</button>
         <button class="btn-danger" onclick="deleteCurrentEvent()">Excluir Evento</button>
       </div>
     </div>
@@ -666,19 +772,45 @@ var db=firebase.firestore();
 var isAdmin=false,allPages=[],allEvents=[],carouselImages=[],carIdx=0;
 var currentMonth=new Date().getMonth(),currentYear=new Date().getFullYear();
 var selectedEventId=null;
-var graduationTimestamp=null; // ms epoch
+var graduationTimestamp=null;
 var countdownInterval=null;
+
+/* ── CALENDAR limits: only 2026 ── */
+var CAL_YEAR=2026;
+var CAL_MIN_MONTH=0;   // January
+var CAL_MAX_MONTH=11;  // December
 
 /* ─ helpers ─ */
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function formatDate(ts){if(!ts)return'';var d=ts.toDate?ts.toDate():new Date(ts);return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'});}
 function fmtDateStr(s){if(!s)return'';var p=s.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
-function typeLabel(t){return{aula:'Atividade',prova:'Prova',entrega:'Entrega',feriado:'Feriado',outro:'Outro'}[t]||t;}
+function typeLabel(t,customLabel){
+  var map={aula:'Atividade',prova:'Prova',entrega:'Entrega',feriado:'Feriado',outro:'Outro'};
+  if(t==='outro'&&customLabel)return customLabel;
+  return map[t]||t;
+}
 function toast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='show '+(type||'');setTimeout(function(){t.className='';},3200);}
 function openModal(id){document.getElementById(id).classList.remove('hidden');}
 function closeModal(id){document.getElementById(id).classList.add('hidden');}
 function closeModalOverlay(e,id){if(e.target.id===id)closeModal(id);}
 function pad2(n){return String(n).padStart(2,'0');}
+
+/* ─ THEME TOGGLE ─ */
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme',theme);
+  var btn=document.getElementById('theme-toggle-btn');
+  btn.textContent=theme==='dark'?'🌙':'☀️';
+  localStorage.setItem('terceiro-info-theme',theme);
+}
+function toggleTheme(){
+  var cur=document.documentElement.getAttribute('data-theme')||'dark';
+  applyTheme(cur==='dark'?'light':'dark');
+}
+// Load saved theme on startup
+(function(){
+  var saved=localStorage.getItem('terceiro-info-theme')||'dark';
+  applyTheme(saved);
+})();
 
 /* ─ MOBILE NAV ─ */
 function toggleMobileNav(){
@@ -695,14 +827,12 @@ function closeMobileNav(){
   document.body.style.overflow='';
 }
 function mobileNavTo(id,btnId){
-  // sync desktop nav highlight
   var sectionMap={'home':0,'cronograma':1,'sobre':2};
   var desktopBtns=document.querySelectorAll('.nav-btn');
   desktopBtns.forEach(function(b){b.classList.remove('active');});
   if(sectionMap[id]!==undefined&&desktopBtns[sectionMap[id]]){
     desktopBtns[sectionMap[id]].classList.add('active');
   }
-  // sync mobile btn highlight
   document.querySelectorAll('.mobile-nav-link').forEach(function(b){b.classList.remove('active');});
   var mBtn=document.getElementById(btnId);
   if(mBtn)mBtn.classList.add('active');
@@ -790,23 +920,16 @@ function loadCarouselImages(){
 function loadGraduationDate(){
   db.collection('settings').doc('graduation').get().then(function(doc){
     if(doc.exists&&doc.data().datetime){
-      graduationTimestamp=doc.data().datetime; // stored as ms number
+      graduationTimestamp=doc.data().datetime;
       startCountdown();
       syncGraduationInputField();
-    } else {
-      renderCountdownEmpty();
-    }
+    }else{renderCountdownEmpty();}
   }).catch(function(){renderCountdownEmpty();});
 }
 function syncGraduationInputField(){
   if(!graduationTimestamp)return;
   var d=new Date(graduationTimestamp);
-  // format for datetime-local input: YYYY-MM-DDTHH:MM
-  var yyyy=d.getFullYear();
-  var mm=pad2(d.getMonth()+1);
-  var dd=pad2(d.getDate());
-  var hh=pad2(d.getHours());
-  var min=pad2(d.getMinutes());
+  var yyyy=d.getFullYear(),mm=pad2(d.getMonth()+1),dd=pad2(d.getDate()),hh=pad2(d.getHours()),min=pad2(d.getMinutes());
   var inp=document.getElementById('graduation-datetime-input');
   if(inp)inp.value=yyyy+'-'+mm+'-'+dd+'T'+hh+':'+min;
 }
@@ -831,22 +954,15 @@ function renderCountdown(){
   var display=document.getElementById('countdown-display');
   var sub=document.getElementById('countdown-date-display');
   if(!graduationTimestamp){renderCountdownEmpty();return;}
-  var now=Date.now();
-  var diff=graduationTimestamp-now;
-  // Show the date in the subtitle
+  var now=Date.now(),diff=graduationTimestamp-now;
   var gDate=new Date(graduationTimestamp);
-  sub.textContent=gDate.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})
-    +' às '+pad2(gDate.getHours())+':'+pad2(gDate.getMinutes());
+  sub.textContent=gDate.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'})+' às '+pad2(gDate.getHours())+':'+pad2(gDate.getMinutes());
   if(diff<=0){
     display.innerHTML='<div class="countdown-expired"><div class="emoji">🎓</div><p>FORMADOS!</p><span>Parabéns, Terceiro INFO!</span></div>';
     if(countdownInterval){clearInterval(countdownInterval);countdownInterval=null;}
     return;
   }
-  var totalSec=Math.floor(diff/1000);
-  var days=Math.floor(totalSec/86400);
-  var hours=Math.floor((totalSec%86400)/3600);
-  var mins=Math.floor((totalSec%3600)/60);
-  var secs=totalSec%60;
+  var totalSec=Math.floor(diff/1000),days=Math.floor(totalSec/86400),hours=Math.floor((totalSec%86400)/3600),mins=Math.floor((totalSec%3600)/60),secs=totalSec%60;
   display.innerHTML='<div class="countdown-grid">'
     +'<div class="countdown-unit"><span class="countdown-num">'+String(days).padStart(3,'0')+'</span><span class="countdown-label">Dias</span></div>'
     +'<div class="countdown-unit"><span class="countdown-num">'+pad2(hours)+'</span><span class="countdown-label">Horas</span></div>'
@@ -855,30 +971,142 @@ function renderCountdown(){
     +'</div>';
 }
 function renderCountdownEmpty(){
-  var display=document.getElementById('countdown-display');
-  var sub=document.getElementById('countdown-date-display');
+  var display=document.getElementById('countdown-display'),sub=document.getElementById('countdown-date-display');
   sub.textContent='';
   display.innerHTML='<div class="countdown-no-date"><span>🎓</span>'+(isAdmin?'Defina a data da formatura no painel abaixo.':'A data da formatura ainda não foi definida.')+'</div>';
 }
 
-/* ─ save page ─ */
-function openNewPageModal(){openModal('modal-new-page');}
+/* ─ RICH EDITOR helpers ─ */
+function fmt(cmd,val){
+  document.getElementById('page-content-editor').focus();
+  document.execCommand(cmd,false,val||null);
+}
+function insertLink(){
+  var url=prompt('URL do link:');
+  if(url){
+    var text=prompt('Texto do link:','Clique aqui');
+    document.getElementById('page-content-editor').focus();
+    document.execCommand('insertHTML',false,'<a href="'+url+'" target="_blank" rel="noopener">'+esc(text||url)+'</a>');
+  }
+}
+function insertImage(){
+  var url=prompt('URL da imagem:');
+  if(url){
+    document.getElementById('page-content-editor').focus();
+    document.execCommand('insertHTML',false,'<img src="'+url+'" alt="" style="max-width:100%;border-radius:6px;margin:1rem 0">');
+  }
+}
+/* iframe insert */
+function openInsertIframe(){document.getElementById('insert-iframe-modal').classList.add('open');}
+function closeInsertIframe(){document.getElementById('insert-iframe-modal').classList.remove('open');document.getElementById('iframe-input').value='';}
+function confirmInsertIframe(){
+  var raw=document.getElementById('iframe-input').value.trim();
+  if(!raw){toast('Cole um link ou código iframe.','error');return;}
+  var html='';
+  // If it's a YouTube URL, convert to embed
+  var ytMatch=raw.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+  if(ytMatch){
+    html='<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:1.3rem 0;border-radius:6px"><iframe src="https://www.youtube.com/embed/'+ytMatch[1]+'" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:6px" allowfullscreen></iframe></div>';
+  } else if(raw.startsWith('<iframe')){
+    // Wrap raw iframe
+    html='<div style="margin:1.3rem 0">'+raw+'</div>';
+  } else {
+    // Generic URL iframe
+    html='<div style="margin:1.3rem 0"><iframe src="'+raw+'" style="width:100%;height:400px;border:1px solid var(--border2);border-radius:6px" allowfullscreen></iframe></div>';
+  }
+  document.getElementById('page-content-editor').focus();
+  document.execCommand('insertHTML',false,html);
+  closeInsertIframe();
+}
+/* button insert */
+function openInsertButton(){document.getElementById('insert-button-modal').classList.add('open');}
+function closeInsertButton(){document.getElementById('insert-button-modal').classList.remove('open');document.getElementById('btn-text-input').value='';document.getElementById('btn-url-input').value='';}
+function confirmInsertButton(){
+  var text=document.getElementById('btn-text-input').value.trim();
+  var url=document.getElementById('btn-url-input').value.trim();
+  var color=document.getElementById('btn-color-input').value;
+  if(!text||!url){toast('Preencha texto e URL.','error');return;}
+  var html='<p><a href="'+url+'" target="_blank" rel="noopener" style="display:inline-block;background:'+color+';color:#fff;padding:.55rem 1.3rem;border-radius:4px;font-weight:700;font-size:.82rem;letter-spacing:1px;text-transform:uppercase;text-decoration:none;margin:.5rem 0">'+esc(text)+'</a></p>';
+  document.getElementById('page-content-editor').focus();
+  document.execCommand('insertHTML',false,html);
+  closeInsertButton();
+}
+
+/* ─ save / update page ─ */
+function openNewPageModal(){
+  // clear edit state
+  document.getElementById('editing-page-id').value='';
+  document.getElementById('modal-page-title-label').textContent='Nova Notícia';
+  document.getElementById('edit-mode-badge').classList.add('hidden');
+  document.getElementById('save-page-btn').textContent='Publicar Notícia';
+  clearPageForm();
+  openModal('modal-new-page');
+}
+function openEditPage(id){
+  var page=null;for(var i=0;i<allPages.length;i++){if(allPages[i].id===id){page=allPages[i];break;}}
+  if(!page)return;
+  document.getElementById('editing-page-id').value=id;
+  document.getElementById('modal-page-title-label').textContent='Editar Notícia';
+  document.getElementById('edit-mode-badge').classList.remove('hidden');
+  document.getElementById('save-page-btn').textContent='Salvar Alterações';
+  document.getElementById('page-title').value=page.title||'';
+  document.getElementById('page-category').value=page.category||'Geral';
+  document.getElementById('page-cover').value=page.cover||'';
+  document.getElementById('page-excerpt').value=page.excerpt||'';
+  document.getElementById('page-author').value=page.author||'';
+  // Load content — stored as HTML in richContent, or plain text fallback
+  var editor=document.getElementById('page-content-editor');
+  if(page.richContent){
+    editor.innerHTML=page.richContent;
+  } else {
+    // Convert old plain-text format to HTML for editing
+    var lines=(page.content||'').split('\n'),pars=[],cur=[];
+    lines.forEach(function(l){var t=l.trim();if(!t){if(cur.length){pars.push(cur.join(' '));cur=[];}}else cur.push(t);});
+    if(cur.length)pars.push(cur.join(' '));
+    var isUrl=/^https?:\/\/\S+\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
+    editor.innerHTML=pars.map(function(p){
+      if(isUrl.test(p))return'<img src="'+p+'" alt="" style="max-width:100%;border-radius:6px;margin:1rem 0">';
+      return'<p>'+p+'</p>';
+    }).join('');
+  }
+  openModal('modal-new-page');
+}
 function savePage(){
   if(!isAdmin)return;
+  var editId=document.getElementById('editing-page-id').value.trim();
   var title=document.getElementById('page-title').value.trim();
   var excerpt=document.getElementById('page-excerpt').value.trim();
-  var content=document.getElementById('page-content').value.trim();
+  var editor=document.getElementById('page-content-editor');
+  var richContent=editor.innerHTML.trim();
   var cat=document.getElementById('page-category').value;
   var cover=document.getElementById('page-cover').value.trim();
   var author=document.getElementById('page-author').value.trim()||'Redação 3º INFO';
-  if(!title||!excerpt||!content){toast('Preencha os campos obrigatórios.','error');return;}
-  var btn=document.getElementById('save-page-btn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Publicando…';
-  db.collection('pages').add({title:title,excerpt:excerpt,content:content,category:cat,cover:cover,author:author,createdAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(ref){
-    allPages.unshift({id:ref.id,title:title,excerpt:excerpt,content:content,category:cat,cover:cover,author:author,createdAt:new Date()});
-    closeModal('modal-new-page');clearPageForm();renderNews();toast('Notícia publicada!','success');
-  }).catch(function(e){toast('Erro: '+e.message,'error');}).finally(function(){btn.disabled=false;btn.textContent='Publicar Notícia';});
+  if(!title||!excerpt||!richContent||richContent==='<br>'){toast('Preencha os campos obrigatórios.','error');return;}
+  var btn=document.getElementById('save-page-btn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> '+(editId?'Salvando…':'Publicando…');
+  var data={title:title,excerpt:excerpt,richContent:richContent,content:'',category:cat,cover:cover,author:author};
+  if(editId){
+    // UPDATE existing
+    db.collection('pages').doc(editId).update(data).then(function(){
+      for(var i=0;i<allPages.length;i++){if(allPages[i].id===editId){Object.assign(allPages[i],data);break;}}
+      closeModal('modal-new-page');clearPageForm();renderNews();renderAdminList();
+      toast('Notícia atualizada!','success');
+    }).catch(function(e){toast('Erro: '+e.message,'error');}).finally(function(){btn.disabled=false;btn.textContent='Salvar Alterações';});
+  } else {
+    // CREATE new
+    data.createdAt=firebase.firestore.FieldValue.serverTimestamp();
+    db.collection('pages').add(data).then(function(ref){
+      allPages.unshift(Object.assign({id:ref.id,createdAt:new Date()},data));
+      closeModal('modal-new-page');clearPageForm();renderNews();
+      toast('Notícia publicada!','success');
+    }).catch(function(e){toast('Erro: '+e.message,'error');}).finally(function(){btn.disabled=false;btn.textContent='Publicar Notícia';});
+  }
 }
-function clearPageForm(){['page-title','page-excerpt','page-content','page-author','page-cover'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('page-category').value='Geral';}
+function clearPageForm(){
+  ['page-title','page-excerpt','page-author','page-cover'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('page-category').value='Geral';
+  document.getElementById('page-content-editor').innerHTML='';
+  document.getElementById('editing-page-id').value='';
+}
 function deletePage(id){
   if(!isAdmin||!confirm('Excluir esta notícia?'))return;
   db.collection('pages').doc(id).delete().then(function(){
@@ -918,21 +1146,31 @@ function openArticle(id){
   var page=null;for(var i=0;i<allPages.length;i++){if(allPages[i].id===id){page=allPages[i];break;}}if(!page)return;
   document.querySelectorAll('.page-section').forEach(function(s){s.classList.remove('active');});
   document.getElementById('article-view').classList.add('active');window.scrollTo(0,0);
-  var isUrl=/^https?:\/\/\S+\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
-  var lines=(page.content||'').split('\n'),pars=[],cur=[];
-  lines.forEach(function(l){var t=l.trim();if(!t){if(cur.length){pars.push(cur.join(' '));cur=[];}}else cur.push(t);});
-  if(cur.length)pars.push(cur.join(' '));
-  var bodyHtml=pars.map(function(para){
-    if(isUrl.test(para))return'<img src="'+esc(para)+'" alt="" style="max-width:100%;border-radius:6px;margin:1rem 0" onerror="this.style.display=\'none\'">';
-    return'<p>'+esc(para)+'</p>';
-  }).join('');
+  var bodyHtml='';
+  if(page.richContent){
+    bodyHtml=page.richContent;
+  } else {
+    var isUrl=/^https?:\/\/\S+\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
+    var lines=(page.content||'').split('\n'),pars=[],cur=[];
+    lines.forEach(function(l){var t=l.trim();if(!t){if(cur.length){pars.push(cur.join(' '));cur=[];}}else cur.push(t);});
+    if(cur.length)pars.push(cur.join(' '));
+    bodyHtml=pars.map(function(para){
+      if(isUrl.test(para))return'<img src="'+esc(para)+'" alt="" style="max-width:100%;border-radius:6px;margin:1rem 0" onerror="this.style.display=\'none\'">';
+      return'<p>'+esc(para)+'</p>';
+    }).join('');
+  }
   var covHtml=page.cover?'<img class="article-cover" src="'+esc(page.cover)+'" alt="" onerror="this.style.display=\'none\'">':'';
-  var delBtn=isAdmin?'<button class="btn-danger" style="margin-top:2.5rem" onclick="deletePage(\''+page.id+'\')">Excluir esta notícia</button>':'';
+  var adminBtns=isAdmin
+    ?'<div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2.5rem">'
+      +'<button class="read-more-btn" style="margin-top:0" onclick="openEditPage(\''+page.id+'\')">✏️ Editar Notícia</button>'
+      +'<button class="btn-danger" onclick="deletePage(\''+page.id+'\')">Excluir</button>'
+      +'</div>'
+    :'';
   document.getElementById('article-content').innerHTML=covHtml
     +'<div class="article-tag">'+esc(page.category||'Geral')+'</div>'
     +'<h1 class="article-title">'+esc(page.title)+'</h1>'
     +'<div class="article-meta-bar"><strong>'+esc(page.author||'Redação 3º INFO')+'</strong><span>·</span><span>'+formatDate(page.createdAt)+'</span></div>'
-    +'<div class="article-body">'+bodyHtml+'</div>'+delBtn;
+    +'<div class="article-body">'+bodyHtml+'</div>'+adminBtns;
 }
 function closeArticle(){
   document.getElementById('article-view').classList.remove('active');
@@ -944,34 +1182,108 @@ function closeArticle(){
 function renderAdminList(){
   var list=document.getElementById('admin-pages-list');
   if(!allPages.length){list.innerHTML='<p style="color:var(--muted)">Nenhuma notícia publicada ainda.</p>';return;}
-  list.innerHTML=allPages.map(function(p){return'<div class="admin-list-item"><div class="admin-item-info"><div class="admin-item-title">'+esc(p.title)+'</div><div class="admin-item-meta">'+esc(p.category||'Geral')+' · '+esc(p.author||'')+' · '+formatDate(p.createdAt)+'</div></div><div class="admin-item-actions"><button class="read-more-btn" style="padding:.36rem .75rem;font-size:.67rem;margin-top:0" onclick="openArticle(\''+p.id+'\')">Ver</button><button class="btn-danger" onclick="deletePage(\''+p.id+'\')">Excluir</button></div></div>';}).join('');
+  list.innerHTML=allPages.map(function(p){return'<div class="admin-list-item"><div class="admin-item-info"><div class="admin-item-title">'+esc(p.title)+'</div><div class="admin-item-meta">'+esc(p.category||'Geral')+' · '+esc(p.author||'')+' · '+formatDate(p.createdAt)+'</div></div><div class="admin-item-actions"><button class="read-more-btn" style="padding:.36rem .75rem;font-size:.67rem;margin-top:0" onclick="openArticle(\''+p.id+'\')">Ver</button><button class="read-more-btn" style="padding:.36rem .75rem;font-size:.67rem;margin-top:0;background:var(--gold);color:#111" onclick="openEditPage(\''+p.id+'\')">✏️ Editar</button><button class="btn-danger" onclick="deletePage(\''+p.id+'\')">Excluir</button></div></div>';}).join('');
 }
 
 /* ─ events ─ */
-function openNewEventModal(){openModal('modal-new-event');}
-function openAddEventForDay(dateStr){document.getElementById('event-date').value=dateStr;openModal('modal-new-event');}
+function handleEventTypeChange(){
+  var type=document.getElementById('event-type').value;
+  var grp=document.getElementById('event-custom-type-group');
+  grp.style.display=(type==='outro')?'block':'none';
+  if(type!=='outro')document.getElementById('event-custom-type').value='';
+}
+function openNewEventModal(){
+  document.getElementById('editing-event-id').value='';
+  document.getElementById('modal-event-title-label').textContent='Novo Evento';
+  document.getElementById('edit-event-badge').classList.add('hidden');
+  document.getElementById('save-event-btn').textContent='Salvar Evento';
+  clearEventForm();
+  openModal('modal-new-event');
+}
+function openAddEventForDay(dateStr){
+  document.getElementById('editing-event-id').value='';
+  document.getElementById('modal-event-title-label').textContent='Novo Evento';
+  document.getElementById('edit-event-badge').classList.add('hidden');
+  document.getElementById('save-event-btn').textContent='Salvar Evento';
+  clearEventForm();
+  document.getElementById('event-date').value=dateStr;
+  openModal('modal-new-event');
+}
+function openEditEvent(){
+  var id=selectedEventId;
+  var ev=null;for(var i=0;i<allEvents.length;i++){if(allEvents[i].id===id){ev=allEvents[i];break;}}
+  if(!ev)return;
+  closeModal('modal-event-detail');
+  document.getElementById('editing-event-id').value=id;
+  document.getElementById('modal-event-title-label').textContent='Editar Evento';
+  document.getElementById('edit-event-badge').classList.remove('hidden');
+  document.getElementById('save-event-btn').textContent='Salvar Alterações';
+  document.getElementById('event-name').value=ev.name||'';
+  document.getElementById('event-date').value=ev.date||'';
+  document.getElementById('event-desc').value=ev.desc||'';
+  // Handle type
+  var storedType=ev.type||'aula';
+  var knownTypes=['aula','prova','entrega','feriado','outro'];
+  if(knownTypes.indexOf(storedType)===-1){
+    // it's a custom label saved as type
+    document.getElementById('event-type').value='outro';
+    document.getElementById('event-custom-type').value=storedType;
+    document.getElementById('event-custom-type-group').style.display='block';
+  } else {
+    document.getElementById('event-type').value=storedType;
+    document.getElementById('event-custom-type-group').style.display=(storedType==='outro')?'block':'none';
+    if(ev.customType)document.getElementById('event-custom-type').value=ev.customType;
+  }
+  openModal('modal-new-event');
+}
 function saveEvent(){
+  var editId=document.getElementById('editing-event-id').value.trim();
   var name=document.getElementById('event-name').value.trim();
   var date=document.getElementById('event-date').value;
-  var type=document.getElementById('event-type').value;
+  var typeVal=document.getElementById('event-type').value;
+  var customType=document.getElementById('event-custom-type').value.trim();
   var desc=document.getElementById('event-desc').value.trim();
   if(!name||!date){toast('Preencha nome e data.','error');return;}
+  if(typeVal==='outro'&&!customType){toast('Escreva o tipo do evento.','error');return;}
+  // Store: if outro, save the custom label directly as type for display, keep customType field too
+  var savedType=typeVal;
+  var data={name:name,date:date,type:savedType,customType:(typeVal==='outro'?customType:''),desc:desc};
   var btn=document.getElementById('save-event-btn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Salvando…';
-  db.collection('events').add({name:name,date:date,type:type,desc:desc}).then(function(ref){
-    allEvents.push({id:ref.id,name:name,date:date,type:type,desc:desc});
-    allEvents.sort(function(a,b){return a.date.localeCompare(b.date);});
-    closeModal('modal-new-event');clearEventForm();renderCalendar();toast('Evento adicionado!','success');
-  }).catch(function(e){toast('Erro: '+e.message,'error');}).finally(function(){btn.disabled=false;btn.textContent='Salvar Evento';});
+  if(editId){
+    db.collection('events').doc(editId).update(data).then(function(){
+      for(var i=0;i<allEvents.length;i++){if(allEvents[i].id===editId){Object.assign(allEvents[i],data);break;}}
+      allEvents.sort(function(a,b){return a.date.localeCompare(b.date);});
+      closeModal('modal-new-event');clearEventForm();renderCalendar();
+      toast('Evento atualizado!','success');
+    }).catch(function(e){toast('Erro: '+e.message,'error');}).finally(function(){btn.disabled=false;btn.textContent='Salvar Alterações';});
+  } else {
+    db.collection('events').add(data).then(function(ref){
+      allEvents.push(Object.assign({id:ref.id},data));
+      allEvents.sort(function(a,b){return a.date.localeCompare(b.date);});
+      closeModal('modal-new-event');clearEventForm();renderCalendar();
+      toast('Evento adicionado!','success');
+    }).catch(function(e){toast('Erro: '+e.message,'error');}).finally(function(){btn.disabled=false;btn.textContent='Salvar Evento';});
+  }
 }
-function clearEventForm(){document.getElementById('event-name').value='';document.getElementById('event-date').value='';document.getElementById('event-type').value='aula';document.getElementById('event-desc').value='';}
+function clearEventForm(){
+  document.getElementById('event-name').value='';
+  document.getElementById('event-date').value='';
+  document.getElementById('event-type').value='aula';
+  document.getElementById('event-desc').value='';
+  document.getElementById('event-custom-type').value='';
+  document.getElementById('event-custom-type-group').style.display='none';
+  document.getElementById('editing-event-id').value='';
+}
 function openEventDetail(id){
   var ev=null;for(var i=0;i<allEvents.length;i++){if(allEvents[i].id===id){ev=allEvents[i];break;}}if(!ev)return;
   selectedEventId=id;
   document.getElementById('detail-event-name').textContent=ev.name;
-  document.getElementById('detail-event-date').textContent=fmtDateStr(ev.date)+' · '+typeLabel(ev.type);
+  var lbl=typeLabel(ev.type,ev.customType);
+  document.getElementById('detail-event-date').textContent=fmtDateStr(ev.date)+' · '+lbl;
   document.getElementById('detail-event-desc').textContent=ev.desc||'Sem descrição adicional.';
-  if(isAdmin)document.getElementById('detail-delete-btn').classList.remove('hidden');
-  else document.getElementById('detail-delete-btn').classList.add('hidden');
+  var adminDiv=document.getElementById('detail-admin-actions');
+  if(isAdmin){adminDiv.classList.remove('hidden');adminDiv.style.display='flex';}
+  else{adminDiv.classList.add('hidden');}
   openModal('modal-event-detail');
 }
 function deleteCurrentEvent(){
@@ -983,34 +1295,52 @@ function deleteCurrentEvent(){
   }).catch(function(e){toast('Erro: '+e.message,'error');});
 }
 
-/* ─ calendar ─ */
+/* ─ calendar — limited to 2026 ─ */
 var MONTHS=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+// Initialise to 2026, clamped to current month if 2026, else January
+(function(){
+  var now=new Date();
+  currentYear=CAL_YEAR;
+  currentMonth=(now.getFullYear()===CAL_YEAR)?Math.max(CAL_MIN_MONTH,Math.min(CAL_MAX_MONTH,now.getMonth())):CAL_MIN_MONTH;
+})();
+
 function changeMonth(dir){
-  currentMonth+=dir;
-  if(currentMonth>11){currentMonth=0;currentYear++;}
-  if(currentMonth<0){currentMonth=11;currentYear--;}
+  var next=currentMonth+dir;
+  if(next<CAL_MIN_MONTH||next>CAL_MAX_MONTH)return; // block outside 2026
+  currentMonth=next;
   renderCalendar();
 }
 function renderCalendar(){
-  document.getElementById('cal-month-label').textContent=MONTHS[currentMonth]+' '+currentYear;
+  // Update nav button disabled state
+  var prevBtn=document.getElementById('cal-prev-btn');
+  var nextBtn=document.getElementById('cal-next-btn');
+  if(prevBtn)prevBtn.disabled=(currentMonth<=CAL_MIN_MONTH);
+  if(nextBtn)nextBtn.disabled=(currentMonth>=CAL_MAX_MONTH);
+
+  document.getElementById('cal-month-label').textContent=MONTHS[currentMonth]+' '+CAL_YEAR;
   var grid=document.getElementById('cal-grid');
   var today=new Date();
-  var firstDay=new Date(currentYear,currentMonth,1).getDay();
-  var daysInMonth=new Date(currentYear,currentMonth+1,0).getDate();
-  var daysInPrev=new Date(currentYear,currentMonth,0).getDate();
+  var firstDay=new Date(CAL_YEAR,currentMonth,1).getDay();
+  var daysInMonth=new Date(CAL_YEAR,currentMonth+1,0).getDate();
+  var daysInPrev=new Date(CAL_YEAR,currentMonth,0).getDate();
   var totalCells=Math.ceil((firstDay+daysInMonth)/7)*7;
   var html='';
   for(var i=0;i<totalCells;i++){
     var day,month,year,isOther=false;
-    if(i<firstDay){day=daysInPrev-firstDay+i+1;month=currentMonth-1;year=currentYear;if(month<0){month=11;year--;}isOther=true;}
-    else if(i>=firstDay+daysInMonth){day=i-firstDay-daysInMonth+1;month=currentMonth+1;year=currentYear;if(month>11){month=0;year++;}isOther=true;}
-    else{day=i-firstDay+1;month=currentMonth;year=currentYear;}
+    if(i<firstDay){day=daysInPrev-firstDay+i+1;month=currentMonth-1;year=CAL_YEAR;if(month<0){month=11;year--;}isOther=true;}
+    else if(i>=firstDay+daysInMonth){day=i-firstDay-daysInMonth+1;month=currentMonth+1;year=CAL_YEAR;if(month>11){month=0;year++;}isOther=true;}
+    else{day=i-firstDay+1;month=currentMonth;year=CAL_YEAR;}
     var mm=String(month+1).padStart(2,'0'),dd=String(day).padStart(2,'0');
     var dateStr=year+'-'+mm+'-'+dd;
     var isToday=(day===today.getDate()&&month===today.getMonth()&&year===today.getFullYear());
     var dayEvts=allEvents.filter(function(e){return e.date===dateStr;});
     var cls='cal-day'+(isOther?' other-month':'')+(isToday?' today':'');
-    var evHtml=dayEvts.map(function(e){return'<span class="cal-event type-'+e.type+'" onclick="openEventDetail(\''+e.id+'\')" title="'+esc(e.name)+'">'+esc(e.name)+'</span>';}).join('');
+    var evHtml=dayEvts.map(function(e){
+      var lbl=typeLabel(e.type,e.customType);
+      var dispType=(e.type==='outro')?'outro':e.type;
+      return'<span class="cal-event type-'+dispType+'" onclick="openEventDetail(\''+e.id+'\')" title="'+esc(e.name)+' ('+lbl+')">'+esc(e.name)+'</span>';
+    }).join('');
     var addBtn=isAdmin?'<button class="add-event-day" onclick="openAddEventForDay(\''+dateStr+'\')" title="Adicionar evento">+</button>':'';
     html+='<div class="'+cls+'">'+addBtn+'<span class="day-num">'+day+'</span>'+evHtml+'</div>';
   }
@@ -1074,18 +1404,19 @@ function updateCarouselPos(){
 }
 setInterval(function(){if(carouselImages.length>1)carouselNext();},5000);
 
-/* ─ DOMContentLoaded events ─ */
+/* ─ DOM events ─ */
 document.getElementById('carousel-img-url').addEventListener('input',function(){
   var url=this.value.trim(),wrap=document.getElementById('img-preview-wrap'),img=document.getElementById('img-preview');
   if(url){img.src=url;wrap.style.display='block';}else{wrap.style.display='none';}
 });
 document.getElementById('login-pass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-
-// Close mobile nav with Escape key
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){
     var nav=document.getElementById('mobile-nav');
     if(nav.classList.contains('open'))closeMobileNav();
+    // close insert modals
+    document.getElementById('insert-iframe-modal').classList.remove('open');
+    document.getElementById('insert-button-modal').classList.remove('open');
   }
 });
 
